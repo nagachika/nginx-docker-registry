@@ -18,9 +18,9 @@ if auth && /\ABasic\s+([a-zA-Z0-9\+\/]+=*)/ =~ auth
   if raw_pass
     sha1 = Digest::SHA1.hexdigest(salt+raw_pass)
   end
+
   if digest and digest == sha1
-    Nginx.echo "You are authorized!!"
-    Nginx.return Nginx::HTTP_OK
+    #Nginx.return Nginx::HTTP_OK
   else
     req.headers_out["WWW-Authenticate"] = "Basic realm=\"nginx-docker-registry\""
     Nginx.rputs "Authorization required"
