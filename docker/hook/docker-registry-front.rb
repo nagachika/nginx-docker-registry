@@ -20,6 +20,14 @@ if auth && /\ABasic\s+([a-zA-Z0-9\+\/]+=*)/ =~ auth
   end
 
   if digest and digest == sha1
+    # check repositories namespace
+    if /\A\/v1\/repositories\/([^\/]+)/ =~ req.uri
+      unless Regexp.last_match[1] == user
+        Nginx.errlogger Nginx::LOG_INFO, "repositories namespace permission denied: user: #{user}"
+        Nginx.rputs "Permission Denied"
+        Nginx.return Nginx::HTTP_UNAUTHORIZED
+      end
+    end
     #Nginx.return Nginx::HTTP_OK
   else
     req.headers_out["WWW-Authenticate"] = "Basic realm=\"nginx-docker-registry\""
