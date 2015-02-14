@@ -1,6 +1,6 @@
 # nginx-docker-registry
 
-Docker imgage of nginx reversse proxy for [docker-registry](https://github.com/docker/docker-registry).
+Docker image of nginx reverse proxy for [docker-registry](https://github.com/docker/docker-registry).
 
 - Add Basic Authentication
   - account information derived from Redis
@@ -9,11 +9,12 @@ Docker imgage of nginx reversse proxy for [docker-registry](https://github.com/d
 
 ## TODO
 
+- select upstream server according to authenticated user
 - performance tuning
 
 ## Quick Start
 
-1. clone and prepare certicate files
+1. clone and prepare certificate files
 
 ```
 $ git clone git@github.com:nagachika/nginx-docker-registry.git
@@ -39,7 +40,7 @@ $ docker build nginx-docker-registry .
 $ docker run -d -v `pwd`/ssl  -p 443:443 -e REDIS_HOST=172.17.42.1 -e DIGEST_SALT=salt nginx-docker-registry
 ```
 
-3. prepare account information & proxy backend
+3. prepare account information & proxy upstream
 
 ```
 # get digest string for the password
