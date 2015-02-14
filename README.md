@@ -14,11 +14,9 @@ Docker image of nginx reverse proxy for [docker-registry](https://github.com/doc
 
 ## Quick Start
 
-1. clone and prepare certificate files
+1. prepare certificate files
 
   ```
-  $ git clone git@github.com:nagachika/nginx-docker-registry.git
-  $ cd nginx-docker-registry/
   $ mkdir ssl
   $ cd ssl
   $ echo 01 > ca.srl
@@ -36,8 +34,7 @@ Docker image of nginx reverse proxy for [docker-registry](https://github.com/doc
   ```
   $ dockre run -d -p 6379:6379 redis:latest
   $ docker run -d -p 5000:5000 registry
-  $ docker build nginx-docker-registry .
-  $ docker run -d -v `pwd`/ssl  -p 443:443 -e REDIS_HOST=172.17.42.1 -e DIGEST_SALT=salt nginx-docker-registry
+  $ docker run -d -v `pwd`/ssl -p 443:443 -e REDIS_HOST=172.17.42.1 -e DIGEST_SALT=salt nagachika/nginx-docker-registry
   ```
 
 3. prepare account information & proxy upstream
