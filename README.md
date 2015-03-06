@@ -32,7 +32,7 @@ Docker image of nginx reverse proxy for [docker-registry](https://github.com/doc
 2. start containers
 
   ```
-  $ dockre run -d -p 6379:6379 redis:latest
+  $ docker run -d -p 6379:6379 redis:latest
   $ docker run -d -p 5000:5000 registry
   $ docker run -d -v `pwd`/ssl -p 443:443 -e REDIS_HOST=172.17.42.1 -e DIGEST_SALT=salt nagachika/nginx-docker-registry
   ```
